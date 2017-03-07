@@ -145,10 +145,29 @@ lexer = lex.lex()
 import ply.yacc as yacc
 import sys
 
+
+varTable = {}
+VarTable["global"] = {}
+ids = set()
+global scope
+scope = ['global']
+dirProcedures = {}
+
 # Gramatica
 def p_programa(p):
-	'programa : vars funciones principal'
+	'programa : vars to_var_table funciones principal'
 	p[0] = 'PROGRAM COMPILED'
+
+
+def p_to_var_table(p):
+	var = p[-1]
+	if var not in varTable["global"] and var not in varTable[scope[len(scope)-1]]:
+		ids.add(var)
+		varTable[scope[len(scope)-1)]][varid] = p[-3]
+	else:
+		print('Variable "%s" already registered' % (vardi))
+		sys.exit()
+
 
 def p_vars(p):
 	'''vars : tipo ID s1 s2 PUNTO_COMA vars
@@ -163,8 +182,15 @@ def p_s2(p):
 	      | '''
 
 def p_funciones(p):
-	'''funciones : FUNCION tipoFun ID PARENTESIS_IZQ parametros PARENTESIS_DER bloqueFun funciones
+	'''funciones : FUNCION tipoFun ID to_func_table PARENTESIS_IZQ parametros PARENTESIS_DER bloqueFun funciones
 		     | '''
+
+def p_to_func_table(p):
+	funcname = p[-1]
+	ids.add[p[-1]]
+	scope.append[p[-1]]
+	varTable[funcname] = {}
+	dirProcedures[funcname]= []
 
 def p_tipo(p):
 	''' tipo : DOBLE_RW
