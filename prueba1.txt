@@ -1,0 +1,27 @@
+entero x, z;
+listaEntero lista1 [5];
+funcion entero funcion1 ()
+{
+entero y;
+x = 3 + 5;
+regresa x;
+}
+funcion void funcion2(entero uno, doble dos)
+{
+listaEntero w[10];
+}
+principal
+{
+boleano c;
+listaDoble p[20];
+p[5] = 2+5;
+mientras (x>y)
+{
+si(x>y)
+{
+escribir(5+8-9/2*5);
+escribir(funcion1());
+}
+}
+regresa 0;
+}
